@@ -45,16 +45,16 @@ set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
 
 # general
 option(VERBOSE            "Enable verbose output?" OFF)
-option(ENABLE_DVDCSS      "Enable libdvdcss support?" ON)
-option(ENABLE_UPNP        "Enable UPnP support?" ON)
-option(ENABLE_AIRTUNES    "Enable AirTunes support?" ON)
-option(ENABLE_OPTICAL     "Enable optical support?" ON)
-option(ENABLE_PYTHON      "Enable python support?" ON)
+option(ENABLE_DVDCSS      "Enable libdvdcss support?" OFF)
+option(ENABLE_UPNP        "Enable UPnP support?" OFF)
+option(ENABLE_AIRTUNES    "Enable AirTunes support?" OFF)
+option(ENABLE_OPTICAL     "Enable optical support?" OFF)
+option(ENABLE_PYTHON      "Enable python support?" OFF)
 # use ffmpeg from depends or system
 option(ENABLE_INTERNAL_FFMPEG "Enable internal ffmpeg?" OFF)
 if(UNIX)
   option(FFMPEG_PATH        "Path to external ffmpeg?" "")
-  option(ENABLE_INTERNAL_CROSSGUID "Enable internal crossguid?" ON)
+  option(ENABLE_INTERNAL_CROSSGUID "Enable internal crossguid?" OFF)
   option(ENABLE_INTERNAL_RapidJSON "Enable internal rapidjson?" OFF)
   option(ENABLE_INTERNAL_FMT "Enable internal fmt?" OFF)
   option(ENABLE_INTERNAL_FSTRCMP "Enable internal fstrcmp?" OFF)
@@ -140,20 +140,13 @@ set(required_deps ASS
 # Optional dependencies. Keep in alphabetical order please
 set(optional_deps Alsa
                   Avahi
-                  Bluetooth
                   Bluray
                   CAP
                   CCache
                   CEC
                   DBus
                   LCMS2
-                  LircClient
-                  MDNS
                   MicroHttpd
-                  NFS
-                  PulseAudio
-                  Python
-                  SmbClient
                   Sndio
                   UDEV
                   XSLT
