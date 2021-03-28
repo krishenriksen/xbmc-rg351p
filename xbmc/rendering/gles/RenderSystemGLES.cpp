@@ -293,12 +293,12 @@ void CRenderSystemGLES::SetCameraPosition(const CPoint &camera, int screenWidth,
   float h = (float)m_viewPort[3]*0.5f;
 
   glMatrixModview->LoadIdentity();
-  glMatrixModview->Translatef(-(w + offset.x - stereoFactor), +(h + offset.y), 0);
-  glMatrixModview->LookAt(0.0, 0.0, -2.0*h, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0);
+  glMatrixModview->LookAt(0.0, 0.0, -2.0*h, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+  glMatrixModview->Translatef(-240, -160, 0);
   glMatrixModview.Load();
 
   glMatrixProject->LoadIdentity();
-  glMatrixProject->Frustum( (-w - offset.x)*0.5f, (w - offset.x)*0.5f, (-h + offset.y)*0.5f, (h + offset.y)*0.5f, h, 100*h);
+  glMatrixProject->Frustum( (-w - offset.x)*0.5f, (w - offset.x)*1.0f, (-h + offset.y)*0.5f, w*0.25f, h, 100*h);
   glMatrixProject.Load();
 }
 

@@ -82,7 +82,7 @@ class OPTIONALS::CLircContainer
 public:
   CLircContainer()
   {
-    m_lirc.Start();
+    //m_lirc.Start();
   }
 protected:
   CLirc m_lirc;

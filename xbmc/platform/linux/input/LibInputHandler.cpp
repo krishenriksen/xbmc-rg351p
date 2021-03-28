@@ -22,23 +22,28 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-static int open_restricted(const char *path, int flags, void __attribute__((unused)) *user_data)
-{
-  int fd = open(path, flags);
+static int open_restricted(const char *path, int flags, void __attribute__((unused)) *user_data) {
+	if (strstr(path, "event0") != NULL ||
+		strstr(path, "event1") != NULL ||
+		strstr(path, "event2") != NULL ||
+		strstr(path, "event3") != NULL) {
+		return 0;
+	}
+	else {
+		int fd = open(path, flags);
 
-  if (fd < 0)
-  {
-    CLog::Log(LOGERROR, "%s - failed to open %s (%s)", __FUNCTION__, path, strerror(errno));
-    return -errno;
-  }
+		if (fd < 0) {
+			CLog::Log(LOGERROR, "%s - failed to open %s (%s)", __FUNCTION__, path, strerror(errno));
+			return -errno;
+		}
 
-  auto ret = ioctl(fd, EVIOCGRAB, (void*)1);
-  if (ret < 0)
-  {
-    CLog::Log(LOGDEBUG, "%s - grab requested, but failed for %s (%s)", __FUNCTION__, path, strerror(errno));
-  }
+		auto ret = ioctl(fd, EVIOCGRAB, (void*)1);
+		if (ret < 0) {
+			CLog::Log(LOGDEBUG, "%s - grab requested, but failed for %s (%s)", __FUNCTION__, path, strerror(errno));
+		}
 
-  return fd;
+		return fd;
+	}
 }
 
 static void close_restricted(int fd, void  __attribute__((unused)) *user_data)
